@@ -1,0 +1,264 @@
+/**
+ * Custom cursor styles
+ * Inspired by https://www.we-flow.it
+ */
+
+/* VAG Rounded Font Implementation */
+@font-face {
+  font-family: 'VAG Rounded';
+  src: url('https://db.onlinewebfonts.com/t/92d8a094e24055840bf6f943e6468712.eot');
+  src: url('https://db.onlinewebfonts.com/t/92d8a094e24055840bf6f943e6468712.eot?#iefix') format('embedded-opentype'),
+       url('https://db.onlinewebfonts.com/t/92d8a094e24055840bf6f943e6468712.woff2') format('woff2'),
+       url('https://db.onlinewebfonts.com/t/92d8a094e24055840bf6f943e6468712.woff') format('woff'),
+       url('https://db.onlinewebfonts.com/t/92d8a094e24055840bf6f943e6468712.ttf') format('truetype'),
+       url('https://db.onlinewebfonts.com/t/92d8a094e24055840bf6f943e6468712.svg#VAGRoundedStd') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Page styling - Moving to top for priority */
+body {
+  background-color: #00f !important; /* Adding !important to enforce */
+  color: #fff;
+  font-family: 'VAG Rounded', 'Nunito', 'Inter',sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 50vh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px; /* Add padding for the fixed navbar */
+}
+
+html {
+  background-color: #00f; /* Adding to html element as well */
+}
+
+/* Hide default cursor on all elements */
+* {
+  cursor: none !important;
+}
+
+/* Navigation Bar Styles */
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%; /* Reduced from 100% to prevent cutoff */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 5%;
+  z-index: 1000;
+  background-color: #00f; /* User's change preserved */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-logo a {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  font-family: 'VAG Rounded', 'Nunito', 'Inter', sans-serif;
+}
+
+.nav-links {
+  display: flex;
+  gap: 3rem;
+  margin-right: 1rem; /* Added to prevent contact button cutoff */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  /* User removed opacity: 0.7 - keeping that change */
+  transition: opacity 0.3s ease;
+  font-family: 'VAG Rounded', 'Nunito', 'Inter', sans-serif;
+}
+
+.nav-links a:hover {
+  opacity: 1;
+  color: white;
+}
+
+/* Base styles for cursor elements */
+.cursor-outer,
+.cursor-inner,
+.cursor-trail {
+  pointer-events: none; /* Ensure cursor doesn't interfere with element interactions */
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  will-change: transform; /* Optimize for animations */
+  transform-origin: center center;
+}
+
+/* Outer cursor (larger circle with border) */
+.cursor-outer {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Inner cursor (smaller dot) */
+.cursor-inner {
+  width: 6px;
+  height: 6px;
+  background-color: #fff;
+  mix-blend-mode: difference;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+/* Trail elements */
+.cursor-trail {
+  width: 60px;
+  height: 60px;
+  background-color: #ffffff;
+  transition: transform 0.05s linear; /* Quick transition for smoothness */
+}
+
+/* Hover state for interactive elements */
+.cursor-outer.hover {
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.cursor-inner.hover {
+  width: 4px;
+  height: 4px;
+  opacity: 0.6;
+}
+
+.cursor-trail.hover {
+  opacity: 0.8;
+  transform: scale(1.2);
+}
+
+/* Active state (when clicking) */
+.cursor-outer.active {
+  transform: translate(calc(var(--x) - 15px), calc(var(--y) - 15px)) scale(0.9);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.cursor-inner.active {
+  transform: translate(calc(var(--x) - 3px), calc(var(--y) - 3px)) scale(0.7);
+}
+
+.cursor-trail.active {
+  transform: translate(calc(var(--x) - 6px), calc(var(--y) - 6px)) scale(0.9);
+}
+
+/* Media query for touch devices where custom cursor is unnecessary */
+@media (hover: none) and (pointer: coarse) {
+  .cursor-outer, .cursor-inner, .cursor-trail {
+    display: none;
+  }
+  * {
+    cursor: auto !important;
+  }
+}
+
+/* Rest of page styling */
+.container {
+  max-width: 1000px;
+  padding: 1rem;
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Nunito', sans-serif;
+  font-size: 4.8rem;
+  margin-bottom: 1rem;
+  background: #fff;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  font-family: 'VAG Rounded',  'Nunito', sans-serif;
+}
+
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.button {
+  padding: 0.8rem 1.5rem;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: 'VAG Rounded', 'Inter', 'Nunito', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #222;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-family: 'VAG Rounded', 'Inter', 'Nunito', sans-serif;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+a {
+  color: #4169e1;
+  text-decoration: none;
+  transition: color 0.3s;
+  font-family: 'VAG Rounded', 'Inter', 'Nunito', sans-serif;
+}
+
+a:hover {
+  color: #8a2be2;
+}
+
+/* Responsive adjustments for the navbar */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 1.5rem 5%;
+  }
+  
+  .nav-links {
+    gap: 1.5rem;
+  }
+} 

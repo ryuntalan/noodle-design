@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noodle Design</title>
+  <!-- Adding Google Fonts - Nunito is a good alternative to VAG Rounded -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- For VAG Rounded specifically, we need to include it via @font-face in CSS -->
+  <link rel="stylesheet" href="cursor.css">
+  <style>
+    /* Main container for all SVG elements */
+    .svg-collage {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      position: relative;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Base styling for all SVG items - normal scale */
+    .svg-item {
+      margin: 10px;
+      transform: scale(1);
+      transition: transform 0.5s ease, translate 0.8s ease;
+      position: relative;
+    }
+    
+    /* Hover effect for all SVG items - slight growth on hover */
+    .svg-item:hover {
+      transform: scale(1.1);
+      opacity: 1;
+      z-index: 2;
+    }
+    
+    /* Default layout specific transforms */
+    .layout-default .top-left {
+      transform: translateX(-20px) translateY(-20px) rotate(-5deg);
+    }
+    
+    .layout-default .top-right {
+      transform: translateY(20px) rotate(5deg);
+    }
+    
+    .layout-default .bottom-left {
+      transform: translateY(-20px) rotate(5deg);
+    }
+    
+    .layout-default .bottom-right {
+      transform: translateY(20px) rotate(-5deg);
+    }
+    
+    /* Hover reset transforms for all positioned items 
+    .svg-item.top-left:hover, .svg-item.top-right:hover, 
+    .svg-item.bottom-left:hover, .svg-item.bottom-right:hover {
+      transform: scale(1.2) rotate(0deg);
+    }
+    */
+
+    /* Animation classes for the box arrangement - adjusted to fix spacing */
+    /* bow */
+    .layout-box .top-left {
+      transform: translateX(140px) translateY(-30px) rotate(0deg);
+    }
+    
+    /* rectangle*/
+    .layout-box .bottom-right {
+      transform: translateX(-120px) translateY(-34px) rotate(50deg);
+    }
+    
+    /* circle */
+    .layout-box .bottom-left {
+      transform: translateX(-140px) translateY(80px) rotate(0deg);
+    }
+    
+    /* mac */
+    .layout-box .top-right {
+      transform: translateX(140px) translateY(80px) rotate(-80deg);
+    }
+
+    /* Animation classes for the face arrangement */
+    /* bow */
+    .layout-face .top-left {
+      transform: translateX(225px) translateY(170px) rotate(-10deg);
+    }
+
+    /* mac */
+    .layout-face .top-right {
+      transform: translateX(145px) translateY(-40px) rotate(200deg);
+    }
+
+    /* circle */
+    .layout-face .bottom-left {
+      transform: translateX(-145px) translateY(-30px) rotate(0deg);
+    }
+
+    /* rectangle */
+    .layout-face .bottom-right {
+      transform: translateX(-205px) translateY(70px) rotate(2deg);
+    }
+    
+    /* Scroll down button styling */
+    .scroll-down {
+      position: fixed;
+      bottom: 40px;
+      left: 110px; /* Align with Noodle text in nav by matching left padding */
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.15);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      z-index: 100;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .scroll-down:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(3px);
+    }
+    
+    .scroll-down svg {
+      width: 24px;
+      height: 24px;
+      fill: none;
+      stroke: white;
+      stroke-width: 1.5px;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    /* Animation for subtle flowing motion */
+    @keyframes flowDown {
+      0% { transform: translateY(-2px); opacity: 0.7; }
+      50% { transform: translateY(2px); opacity: 1; }
+      100% { transform: translateY(-2px); opacity: 0.7; }
+    }
+    
+    .scroll-down svg {
+      animation: flowDown 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <!-- Clean minimal navigation bar -->
+  <nav class="nav-container">
+    <div class="nav-logo">
+      <a href="/">Noodle</a>
+    </div>
+    <div class="nav-links">
+      <a href="/work">Work</a>
+      <a href="/about">About</a>
+      <a href="/contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h1>Noodle on it.</h1>
+    <p>We boil down problems and craft beautiful designs.</p>
+    
+    <!-- SVG Collage Section -->
+    <div class="svg-collage" id="svg-collage">
+      <!-- Envelope shape (Bow.svg) -->
+      <div class="svg-item top-left">
+        <svg width="121" height="120" viewBox="0 0 121 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M120.573 102.247C120.573 103.786 118.907 104.749 117.573 103.979L61.5733 71.6465C60.9544 71.2893 60.192 71.2893 59.5732 71.6465L3.57326 103.979C2.23993 104.748 0.573242 103.786 0.573242 102.247L0.573242 19.2022C0.573242 17.6626 2.2399 16.7004 3.57323 17.4701L59.5733 49.8014C60.192 50.1587 60.9544 50.1587 61.5732 49.8014L117.573 17.4701C118.907 16.7004 120.573 17.6626 120.573 19.2022L120.573 102.247Z" fill="white"/>
+        </svg>
+      </div>
+      <!-- Smile shape (Mac.svg) -->
+      <div class="svg-item top-right">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M118 33C119.105 33 120.003 33.8961 119.967 35.0001C119.461 50.1871 113.206 64.6465 102.426 75.4264C91.1742 86.6786 75.913 93 60 93C44.087 93 28.8258 86.6786 17.5736 75.4264C6.79371 64.6465 0.539349 50.1871 0.0333077 35.0001C-0.00347692 33.8961 0.895431 33 2 33L28 33C29.1046 33 29.9931 33.8966 30.0666 34.9987C30.5488 42.2253 33.6337 49.0601 38.7868 54.2132C44.4129 59.8393 52.0435 63 60 63C67.9565 63 75.5871 59.8393 81.2132 54.2132C86.3663 49.0601 89.4512 42.2253 89.9334 34.9987C90.0069 33.8966 90.8954 33 92 33L118 33Z" fill="white"/>
+        </svg>
+      </div>
+      <!-- Circle shape (Rav.svg) -->
+      <div class="svg-item bottom-left">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="44" fill="white"/>
+        </svg>
+      </div>
+      <!-- Rectangle shape (Ton.svg) -->
+      <div class="svg-item bottom-right">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect y="45" width="120" height="30" rx="2" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scroll Down Button -->
+  <div class="scroll-down" id="scroll-down-btn">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 5v12m0 0l-3.5-3.5M12 17l3.5-3.5M12 5v2.5M12 10v2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  
+  <script src="cursor.js"></script>
+  <script>
+    // Animation script to cycle through different layouts
+    document.addEventListener('DOMContentLoaded', function() {
+      const collageContainer = document.getElementById('svg-collage');
+      const layouts = ['layout-default', 'layout-box', 'layout-face'];
+      let currentLayout = 0;
+      
+      // Set initial state with the first layout
+      collageContainer.classList.add(layouts[currentLayout]);
+      
+      // Function to cycle through layouts
+      function cycleLayouts() {
+        // Remove current layout class
+        collageContainer.classList.remove(layouts[currentLayout]);
+        
+        // Move to next layout
+        currentLayout = (currentLayout + 1) % layouts.length;
+        
+        // Add new layout class
+        collageContainer.classList.add(layouts[currentLayout]);
+      }
+      
+      // Start the animation cycle
+      setInterval(cycleLayouts, 3000);
+      
+      // Scroll down button functionality
+      const scrollDownBtn = document.getElementById('scroll-down-btn');
+      scrollDownBtn.addEventListener('click', function() {
+        window.scrollBy({
+          top: window.innerHeight,
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html> 
