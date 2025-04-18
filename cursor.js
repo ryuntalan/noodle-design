@@ -1,11 +1,13 @@
 /**
- * Custom cursor animation with trail effect
- * Inspired by https://www.we-flow.it
+ * Custom cursor animation
  */
 
 // DOM elements
+/* Commenting out trail elements
 let trailElements = [];
-let mainCursor;
+*/
+let cursorOuter; // Circle cursor
+let cursorInner; // Dot cursor
 
 // Mouse position
 let mouseX = 0;
@@ -17,15 +19,18 @@ let prevMouseY = 0;
 let isMoving = false;
 let movementTimeout;
 
+/* Commenting out trail related code
 // Previous positions for trail
 const trailPositions = [];
 const numTrailElements = 12; // Increased number of trail elements for better trail
+*/
 
 // Animation settings
-const ease = 0.35; // Increased easing for more fluid motion
+const ease = 0.35; // Easing for fluid motion
 
 // Initialize custom cursor
 function initCustomCursor() {
+  /* Commenting out trail implementation
   // Calculate segment sizes for color distribution (excluding main cursor)
   const trailCount = numTrailElements - 1;
   const firstSegment = Math.floor(trailCount / 3);
@@ -64,9 +69,17 @@ function initCustomCursor() {
   mainCursor.style.backgroundColor = '#fff';
   mainCursor.style.zIndex = '9999'; // Ensure main cursor is on top
   document.body.appendChild(mainCursor);
+  */
   
-  // The main cursor is handled separately
-  const mainCursorPosition = { x: 0, y: 0 };
+  // Create outer cursor (circle)
+  cursorOuter = document.createElement('div');
+  cursorOuter.className = 'cursor-outer';
+  document.body.appendChild(cursorOuter);
+  
+  // Create inner cursor (dot)
+  cursorInner = document.createElement('div');
+  cursorInner.className = 'cursor-inner';
+  document.body.appendChild(cursorInner);
   
   // Hide default cursor
   document.documentElement.style.cursor = 'none';
@@ -84,10 +97,6 @@ function initCustomCursor() {
     el.addEventListener('mouseleave', onElementLeave);
     el.style.cursor = 'none'; // Ensure default cursor is hidden on interactive elements
   });
-  
-  // Debugging - Check the colors of all trail elements
-  console.log('Trail elements colors:', trailElements.map(el => el.style.backgroundColor));
-  console.log('Color segments:', { firstSegment, secondSegment, totalTrail: trailCount });
   
   // Start animation loop
   requestAnimationFrame(updateCursorPosition);
@@ -115,30 +124,47 @@ function onMouseMove(e) {
 
 // Mouse down handler
 function onMouseDown() {
+  /* Commenting out trail related code
   mainCursor.classList.add('active');
   trailElements.forEach(trail => trail.classList.add('active'));
+  */
+  cursorOuter.classList.add('active');
+  cursorInner.classList.add('active');
 }
 
 // Mouse up handler
 function onMouseUp() {
+  /* Commenting out trail related code
   mainCursor.classList.remove('active');
   trailElements.forEach(trail => trail.classList.remove('active'));
+  */
+  cursorOuter.classList.remove('active');
+  cursorInner.classList.remove('active');
 }
 
 // Interactive element hover enter
 function onElementEnter() {
+  /* Commenting out trail related code
   mainCursor.classList.add('hover');
   trailElements.forEach(trail => trail.classList.add('hover'));
+  */
+  cursorOuter.classList.add('hover');
+  cursorInner.classList.add('hover');
 }
 
 // Interactive element hover leave
 function onElementLeave() {
+  /* Commenting out trail related code
   mainCursor.classList.remove('hover');
   trailElements.forEach(trail => trail.classList.remove('hover'));
+  */
+  cursorOuter.classList.remove('hover');
+  cursorInner.classList.remove('hover');
 }
 
 // Update cursor position with smooth animation
 function updateCursorPosition() {
+  /* Commenting out trail related code
   // Position the main cursor directly at mouse position
   mainCursor.style.transform = `translate(${mouseX - 20}px, ${mouseY - 20}px)`; // Half of 40px
   
@@ -175,6 +201,13 @@ function updateCursorPosition() {
     // Apply the position with centering (19px is half of 38px width)
     trailElements[i].style.transform = `translate(${trailPositions[i].x - 19}px, ${trailPositions[i].y - 19}px)`;
   }
+  */
+  
+  // Update outer cursor (circle) position
+  cursorOuter.style.transform = `translate(${mouseX - 15}px, ${mouseY - 15}px)`;
+  
+  // Update inner cursor (dot) position
+  cursorInner.style.transform = `translate(${mouseX - 3}px, ${mouseY - 3}px)`;
   
   // Continue animation loop
   requestAnimationFrame(updateCursorPosition);
