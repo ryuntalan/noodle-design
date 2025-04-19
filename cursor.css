@@ -182,7 +182,7 @@ html {
 h1 {
   font-family: 'Nunito', sans-serif;
   font-size: 4.8rem;
-  margin-bottom: 1rem;
+  margin: 7rem  auto 1rem;
   background: #fff;
   -webkit-background-clip: text;
   background-clip: text;
